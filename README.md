@@ -10,6 +10,12 @@ First, I started with a simple Google search for inspiration. I was mainly looki
 
 I found the inspiration for this project on Google Images and chose it because the design seemed simple, used an Arduino, and controlled each finger with SG90 servo motors. I also found additional images from the same project website that showed more detailed views of the assembly process, specifically how the fingers were held together using paracord and where the motors were mounted. The construction looked relatively straightforward, so I proceeded to download the STL files.
 
+<br><br>
+
+  <img width="30%" alt="unnamed-1" src="https://github.com/user-attachments/assets/3b29622f-c6d6-4541-a29a-b013c0f2ee0e" />
+  
+  _Figure 1: Project Inspiration - Image 1 of 1_
+
 ## Materials List - Basic
 - 5x SG90 Servo Motors
 - Approx. 150 Grams of PLA Filament & 3D Printer
