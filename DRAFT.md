@@ -66,13 +66,37 @@ Link to Inspiration: https://www.thingiverse.com/thing:4807141/files
 ### System Setup & Execution
 
 ### Arduino Code Explaination
+- The collision safety logic is implemented in two functions: writeThumbSafe() and writeThumbAndMiddle().
+  - In writeThumbSafe(), thumb movement is blocked whenever middleIsDown == true, preventing any independent thumb motion that could interfere with the middle finger’s position.
+  - In writeThumbAndMiddle(), the system performs a similar check using middlePosCurrent == DOWN. If the middle finger is already down, any combined update that would also move the thumb is prevented to avoid unsafe transitions.
+- Both functions rely on stored state variables (middleIsDown, middlePosCurrent) to make sure that the thumb is only allowed to move when the middle finger is not in a potentially conflicting position.
 
 ### Python Code Explaination
+- MediaPipe and OpenCV explainaition from previous report
+- How does the gesture recognition work exactly -> have a
 
 ## Results
+- Gif of gestures 
 
 ## Conclusion
 
 ## Future Improvements
 
 ## Acknowledgements
+
+<br><br>
+
+# THINGS 2 ADD ->
+
+## Figures
+_Figure x: Breadboard Configuration_ <br><br>
+_Figure x: Milled PCB Configuration_ <br><br>
+_Figure x: Schematic of Circuit_ <br><br>
+_Figure x: Simple System Diagram (Camera -> MediaPipe -> Case Recogntion -> Serial Port Communication -> Hand Gesture Replication)_ <br><br>
+
+## Information
+* In what order should the to programs be run -> you should close the serial port on the arduino after you run it so the python script can access it -> why do you need to do this -> simple explaination
+* what do you need to change in the code depeding -> com port name
+* Whatlibraries do you ened installed on to work the python code -> media pipe, open cv, ect
+* how was the virtual environment set up and why -> grab explainition from previous report
+* what libraries does the arduino code need to work properly ->
