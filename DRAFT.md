@@ -14,6 +14,8 @@ First, I started with a simple Google search for inspiration. I was mainly looki
 
 I found the inspiration for this project on Google Images and chose it because the design seemed simple, used an Arduino, and controlled each finger with SG90 servo motors. I also found additional images from the same project website that showed more detailed views of the assembly process, specifically how the fingers were held together using paracord and where the motors were mounted. The construction looked relatively straightforward, so I proceeded to download the STL files.
 
+Link to Inspiration: https://www.thingiverse.com/thing:4807141/files
+
 ## Methodology
 
 ### 3D Printing & Finger Movement
@@ -34,7 +36,7 @@ I found the inspiration for this project on Google Images and chose it because t
 - 1x Arduino Uno
 - 5x SG90 Servo Motors
 - 150 grams of PLA Filament & 3D Printer
-- 1x 5V 2A Power Supply
+- 1x 5V 2A USB Power Supply
 - 1x Spliced USB Cable
 - 1x 1000 uF Capacitor
 - 5ft of Fishing Line
