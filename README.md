@@ -2,7 +2,11 @@
 
 ## Introduction
 
-This project aims to demonstrate the design and construction of a robotic hand capable of mimicking common human hand gestures in real time. The system combines computer vision, Arduino control, servo motors, and 3D printed components to create a robotic hand that responds to live hand movements captured through a webcam. Using Python with OpenCV and MediaPipe, the program detects and classifies different hand gestures, then sends corresponding commands to an Arduino through serial communication. The Arduino controls five SG90 servo motors that move each finger of the robotic hand to replicate the detected gesture. This project shows how digital signal processing can be used with a few servo motors and simple 3D printed components to create robotic motion that responds to human movement in real time.
+This project aims to demonstrate the design and construction of a robotic hand capable of mimicking common human hand gestures in real time. The system combines computer vision, Arduino control, servo motors, and 3D printed components to create a robotic hand that responds to live hand movements captured through a webcam. 
+
+Using Python with OpenCV and MediaPipe, the program detects and classifies different hand gestures, then sends corresponding commands to an Arduino through serial communication. The Arduino controls five SG90 servo motors that move each finger of the robotic hand to replicate the detected gesture. 
+
+This project shows how digital signal processing can be used with a few servo motors and simple 3D printed components to create robotic motion that responds to human movement in real time.
 
 ## Inspiration & Research
 
@@ -16,16 +20,85 @@ I found the inspiration for this project on Google Images and chose it because t
   
   _Figure 1: Project Inspiration - Image 1 of 1_
 
-## Materials List - Basic
+## Methodology
+
+### 3D Printing & Finger Movement
+- The robotic hand components were designed and printed using PLA filament. Each finger was printed in multiple segments connected with flexible joints to allow realistic bending motion. Fishing line was threaded through channels inside each finger and connected to a servo motor mounted in forearm so when the servo arm rotate the finger bends inward.
+
+### Circuit Design
+- Each SG90 servo motor was connected to the Arduino using PWM pins. Since multiple servos can draw significant current simultaneously, an external 5V power supply was used instead of powering the servos directly from the Arduino. A 1000 µF capacitor was added across the power rails to reduce voltage drops and servo jitter.
+
+### Gesture Detection
+- Python was used with OpenCV and MediaPipe to process webcam video in real time. MediaPipe identifies 21 hand landmarks that represent joints and fingertip locations. The software compares landmark positions to determine whether fingers are extended or bent.
+
+### Serial Communication
+- When a gesture is detected, Python sends a simple command string over serial communication to the Arduino. The Arduino interprets the command and adjusts the servo's arm positions to imitate the detected finger positions.
+
+## Hardware
+
+### Materials List - Basic
 - 5x SG90 Servo Motors
-- Approx. 150 Grams of PLA Filament & 3D Printer
-- 5V 2A Power Supply
+- 150 grams of PLA Filament & 3D Printer
+- 1x 5V 2A Power Supply
+- 1x Spliced USB Cable
 - 1x 1000 uF Capacitor
-- Fishing line
-- Paracord
+- 5ft of Fishing Line
+- 5ft of Paracord
+- 5x Rubber Bands
 
-## Materials List - Testing 
-- Breadboard
-- Jumper wires
+### Materials List - Testing 
+- 1x Breadboard
+- 17x Jumper wires
 
-_Figure 1: Diagrams_
+### Printing Process
+- 
+
+### Robotic Hand Assembly
+
+#### System Overview
+- Simple / Detailed System Overview
+
+#### Directions: Mechnaincal Component Assembly
+- 
+
+#### Directions: Electrical Component Assembly
+- 
+
+#### Construction Proccess & Fine Tuning Finger Movement
+- 
+
+## Software
+
+### Arduino Code
+
+- The collision safety logic is implemented in two functions: writeThumbSafe() and writeThumbAndMiddle().
+  - In writeThumbSafe(), thumb movement is blocked whenever middleIsDown == true, preventing any independent thumb motion that could interfere with the middle finger’s position.
+  - In writeThumbAndMiddle(), the system performs a similar check using middlePosCurrent == DOWN. If the middle finger is already down, any combined update that would also move the thumb is prevented to avoid unsafe transitions.
+- Both functions rely on stored state variables (middleIsDown, middlePosCurrent) to make sure that the thumb is only allowed to move when the middle finger is not in a potentially conflicting position.
+
+### Python Code
+- MediaPipe and OpenCV explainaition from previous report
+- How does the gesture recognition work exactly -> have a
+
+## Results
+
+## Conclusion
+
+## Future Improvements 
+
+# THINGS 2 ADD ->
+
+## Figures
+_Figure x: Breadboard Configuration_ <br><br>
+_Figure x: Milled PCB Configuration_ <br><br>
+_Figure x: Schematic of Circuit_ <br><br>
+_Figure x: Simple System Diagram (Camera -> MediaPipe -> Case Recogntion -> Serial Port Communication -> Hand Gesture Replication)_ <br><br>
+
+## Information
+* In what order should the to programs be run -> you should close the serial port on the arduino after you run it so the python script can access it -> why do you need to do this -> simple explaination
+* what do you need to change in the code depeding -> com port name
+* Whatlibraries do you ened installed on to work the python code -> media pipe, open cv, ect
+* how was the virtual environment set up and why -> grab explainition from previous report
+* what libraries does the arduino code need to work properly ->
+
+
