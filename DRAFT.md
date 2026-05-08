@@ -93,6 +93,9 @@ _Figure x: Breadboard Configuration_ <br><br>
 _Figure x: Milled PCB Configuration_ <br><br>
 _Figure x: Schematic of Circuit_ <br><br>
 _Figure x: Simple System Diagram (Camera -> MediaPipe -> Case Recogntion -> Serial Port Communication -> Hand Gesture Replication)_ <br><br>
+  
+## Images
+<img width="30%" alt="unnamed-1" src="https://github.com/user-attachments/assets/3b29622f-c6d6-4541-a29a-b013c0f2ee0e" />
 
 ## Information
 * In what order should the to programs be run -> you should close the serial port on the arduino after you run it so the python script can access it -> why do you need to do this -> simple explaination
