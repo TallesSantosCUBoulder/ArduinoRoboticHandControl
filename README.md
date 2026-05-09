@@ -35,12 +35,12 @@ Link to Inspiration: https://www.thingiverse.com/thing:4807141/files
 ### Basic Materials List
 - 1x Arduino Uno
 - 5x SG90 Servo Motors
-- 150 grams of PLA Filament & 3D Printer
+- 200 grams of PLA Filament & 3D Printer
 - 1x 5V 2A USB Power Supply
 - 1x Spliced USB Cable
 - 1x 1000 uF Capacitor
 - 5ft of Fishing Line
-- 5ft of Paracord
+- 10ft of Paracord
 - 5x Rubber Bands
 
 ### Additional Materials - Testing
@@ -49,13 +49,36 @@ Link to Inspiration: https://www.thingiverse.com/thing:4807141/files
 
 ### Printing Process
 
+I modified the STL files from the Thingiverse link above. The arm piece needed to be scaled down to 10% of its original size. After this, I imported the files into my printer’s slicer software.
+
+For the print settings, I specified auto tree supports, no brim, and 15% infill for the arm, fingers, and arm stand. For the hand, I used the same settings but without supports so that there would be no plastic obstructing the holes where the fishing line will eventually pass through. I oriented the hand and arm in a vertical position, while the fingers were laid flat. 
+
+Each file was printed separately in case of a misprint.
+
 ### Robotic Hand Assembly
 
 #### System Overview
 
-#### Directions: Mechnaincal Component Assembly
+Directions: Mechanical Component Assembly
+- Remove supports from prints.
+- Cut the paracord and melt one end to make it easier to feed through the holes.
+- Starting with the pinky, feed the melted end up through each segment of the finger on the left side, and then back down on the right side, leaving about 6 inches of excess cord on both sides.
+- Repeat this step for the ring finger next, and continue until all five fingers have been threaded.
+- Cut the cord between each finger.
+- Next, cut five lengths of fishing line, each one foot long, and tie a double fisherman’s knot on one end.
+- Feed the non-knotted end of the fishing line through the hole at the tip of each finger. The knotted end should prevent the line from being pulled through completely.
+- Next, feed the fishing line and the paracord ends through the holes in the hand piece.
+- Tie the paracord in an overhand knot for each finger, making sure to leave about 1 cm of space between each finger segment so it can bend.
+- Next, feed the fishing line for each finger from the holes in the hand to the corresponding holes in the arm piece.
+- Hot glue the bottom surface of the hand to the top surface of the arm piece.
+- Next, take five servo motors and hot glue them in place on the piece as shown in Figure X.
+- Then, screw in the single-sided arm for each servo motor.
+- Attach the fishing lines to the ends of each servo motor arm using a double fisherman’s knot, as shown in Figure X.
+- Orient the servo motor arms in the same direction so that when they point toward the top of the hand, the fingers are extended, and when the arms point away from the fingers, the fingers are clenched.
+- girth hitch an appropriately sized rubber band the tip of of each finger and tie and overhand not at the base leave a loop big enough to wrap around the parcord know at the knuckle of each finger.
 
 #### Directions: Electrical Component Assembly
+- 
 
 #### Construction Proccess & Fine Tuning Finger Movement
 
