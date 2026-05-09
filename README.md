@@ -6,7 +6,7 @@ This project aims to demonstrate the design and construction of a robotic hand c
 
 Using Python with OpenCV and MediaPipe, the program detects and classifies different hand gestures, then sends corresponding commands to an Arduino through serial communication. The Arduino controls five SG90 servo motors that move each finger of the robotic hand to replicate the detected gesture. 
 
-This project demonstrates how a few servo motors and simple 3D printed components can be used create robotic motion that responds to human movement in real time.
+This project demonstrates how a few servo motors and simple 3D printed components can be used to create robotic motion that responds to human movement in real time.
 
 ## Inspiration & Research
 
@@ -19,7 +19,7 @@ Link to Inspiration: https://www.thingiverse.com/thing:4807141/files
 ## Methodology
 
 ### 3D Printing & Finger Movement
-- The robotic hand components were designed and printed using PLA filament. Each finger was printed in multiple segments connected with flexible joints to allow realistic bending motion. Fishing line was threaded through channels inside each finger and connected to a servo motor mounted in forearm so when the servo arm rotate the finger bends inward.
+- The robotic hand components were designed and printed using PLA filament. Each finger was printed in multiple segments connected with flexible joints to allow realistic bending motion. Fishing line was threaded through channels inside each finger and connected to a servo motor mounted in the forearm so when the servo arm rotates the finger bends inward.
 
 ### Circuit Design
 - Each SG90 servo motor was connected to the Arduino using PWM pins. Since multiple servos can draw significant current simultaneously, an external 5V power supply was used instead of powering the servos directly from the Arduino. A 1000 µF capacitor was added across the power rails to reduce voltage drops and servo jitter.
@@ -101,14 +101,14 @@ The robotic hand is made up of 3D printed parts, strings, rubber bands, and serv
 
 ### System Setup & Execution
 
-### Arduino Code Explaination
+### Arduino Code Explanation
 - The collision safety logic is implemented in two functions: writeThumbSafe() and writeThumbAndMiddle().
   - In writeThumbSafe(), thumb movement is blocked whenever middleIsDown == true, preventing any independent thumb motion that could interfere with the middle finger’s position.
   - In writeThumbAndMiddle(), the system performs a similar check using middlePosCurrent == DOWN. If the middle finger is already down, any combined update that would also move the thumb is prevented to avoid unsafe transitions.
 - Both functions rely on stored state variables (middleIsDown, middlePosCurrent) to make sure that the thumb is only allowed to move when the middle finger is not in a potentially conflicting position.
 
-### Python Code Explaination
-- MediaPipe and OpenCV explainaition from previous report
+### Python Code Explanation
+- MediaPipe and OpenCV explanation from previous report
 - How does the gesture recognition work exactly -> have a
 
 ## Results
@@ -128,14 +128,17 @@ The robotic hand is made up of 3D printed parts, strings, rubber bands, and serv
 _Figure x: Breadboard Configuration_ <br><br>
 _Figure x: Milled PCB Configuration_ <br><br>
 _Figure x: Schematic of Circuit_ <br><br>
-_Figure x: Simple System Diagram (Camera -> MediaPipe -> Case Recogntion -> Serial Port Communication -> Hand Gesture Replication)_ <br><br>
+_Figure x: Simple System Diagram (Camera -> MediaPipe -> Case Recognition -> Serial Port Communication -> Hand Gesture Replication)_ <br><br>
   
 ## Images
 <img width="30%" alt="unnamed-1" src="https://github.com/user-attachments/assets/3b29622f-c6d6-4541-a29a-b013c0f2ee0e" />
 
 ## Information
-* In what order should the to programs be run -> you should close the serial port on the arduino after you run it so the python script can access it -> why do you need to do this -> simple explaination
-* what do you need to change in the code depeding -> com port name
-* Whatlibraries do you ened installed on to work the python code -> media pipe, open cv, ect
-* how was the virtual environment set up and why -> grab explainition from previous report
+* In what order should the to programs be run -> you should close the serial port on the arduino after you run it so the python script can access it -> why do you need to do this -> simple explanation
+* what do you need to change in the code depending -> com port name
+* What libraries do you need installed on to work the python code -> media pipe, open cv, ect
+* how was the virtual environment set up and why -> grab explanation from previous report
 * what libraries does the arduino code need to work properly ->
+
+
+
