@@ -6,7 +6,7 @@ This project aims to demonstrate the design and construction of a robotic hand c
 
 Using Python with OpenCV and MediaPipe, the program detects and classifies different hand gestures, then sends corresponding commands to an Arduino through serial communication. The Arduino controls five SG90 servo motors that move each finger of the robotic hand to replicate the detected gesture. 
 
-This project shows how digital signal processing can be used with a few servo motors and simple 3D printed components to create robotic motion that responds to human movement in real time.
+This project demonstrates how a few servo motors and simple 3D printed components can be used create robotic motion that responds to human movement in real time.
 
 ## Inspiration & Research
 
