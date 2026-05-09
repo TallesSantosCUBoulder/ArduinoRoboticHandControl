@@ -59,28 +59,41 @@ Each file was printed separately in case of a misprint.
 
 #### System Overview
 
-Directions: Mechanical Component Assembly
-- Remove supports from prints.
-- Cut the paracord and melt one end to make it easier to feed through the holes.
-- Starting with the pinky, feed the melted end up through each segment of the finger on the left side, and then back down on the right side, leaving about 6 inches of excess cord on both sides.
-- Repeat this step for the ring finger next, and continue until all five fingers have been threaded.
-- Cut the cord between each finger.
-- Next, cut five lengths of fishing line, each one foot long, and tie a double fisherman’s knot on one end.
-- Feed the non-knotted end of the fishing line through the hole at the tip of each finger. The knotted end should prevent the line from being pulled through completely.
-- Next, feed the fishing line and the paracord ends through the holes in the hand piece.
-- Tie the paracord in an overhand knot for each finger, making sure to leave about 1 cm of space between each finger segment so it can bend.
-- Next, feed the fishing line for each finger from the holes in the hand to the corresponding holes in the arm piece.
-- Hot glue the bottom surface of the hand to the top surface of the arm piece.
-- Next, take five servo motors and hot glue them in place on the piece as shown in Figure X.
-- Then, screw in the single-sided arm for each servo motor.
-- Attach the fishing lines to the ends of each servo motor arm using a double fisherman’s knot, as shown in Figure X.
-- Orient the servo motor arms in the same direction so that when they point toward the top of the hand, the fingers are extended, and when the arms point away from the fingers, the fingers are clenched.
-- girth hitch an appropriately sized rubber band the tip of of each finger and tie and overhand not at the base leave a loop big enough to wrap around the parcord know at the knuckle of each finger.
+The robotic hand is made up of 3D printed parts, strings, rubber bands, and servo motors. The printed parts form the shape of the hand and fingers and keep everything in place. Paracord runs through the fingers to guide how they bend and help them move smoothly. Fishing line connects each finger to a servo motor and acts like a tendon that pulls the fingers closed when the motor turns. Rubber bands help pull the fingers back open after they are bent. The servo motors control the movement by pulling or releasing the fishing line based on electrical signals, allowing each finger to move and form different gestures.
+
+#### Mechanical Component Assembly Instructions
+
+- Remove all supports from the 3D printed parts.
+- Cut the paracord and melt one end to make it easier to thread through the holes.
+- Starting with the pinky finger, feed the melted end of the paracord up through each segment on the left side of the finger, then back down through the right side, leaving about 6 inches of excess cord on both ends.
+- Repeat this process for the ring finger, then continue until all five fingers are threaded.
+- Cut the paracord between each finger so each finger has its own separate line.
+- Next, cut five pieces of fishing line, each about one foot long. Tie a double fisherman’s knot on one end of each line.
+- Feed the untied end of the fishing line through the hole at the tip of each finger. The knot should prevent it from pulling through completely.
+- Then, route both the paracord and fishing lines through the corresponding holes in the hand piece.
+- Tie the paracord for each finger using an overhand knot, leaving about 1 cm of slack between finger segments so they can bend properly.
+- Feed the fishing lines from the hand piece into the corresponding holes in the arm piece.
+- Secure the bottom of the hand to the top of the arm piece using hot glue.
+- Mount five servo motors onto the arm piece using hot glue, positioning them as shown in Figure X.
+- Attach single-sided servo arms to each motor using screws.
+- Tie each fishing line to its corresponding servo arm using a double fisherman’s knot (see Figure X).
+- Align all servo arms so that when they point toward the top of the hand, the fingers are extended, and when they rotate away from the fingers, the fingers curl into a fist.
+- Finally, attach a rubber band to the tip of each finger using a girth hitch. Tie an overhand knot at the base of each finger, leaving a loop large enough to wrap around the paracord knot at the knuckle.
 
 #### Directions: Electrical Component Assembly
-- 
-
-#### Construction Proccess & Fine Tuning Finger Movement
+- Identify all five servo motors and label them (e.g., Thumb, Index, Middle, Ring, Pinky) to avoid wiring confusion.
+- Connect each servo motor to the Arduino:
+  - Connect signal wires to separate PWM-capable digital pins.
+  - Connect all power (VCC) wires together to a 5V 2A external power supply.
+  - Connect all ground (GND) wires together and ensure a common ground between the external power supply and the microcontroller.
+  - Place a 1000 µF electrolytic capacitor across the 5V and GND rails near the servos to help smooth current spikes.
+    - See Figure X for detailed schematic
+- Ensure the ground of the external power supply is connected to the Arduino's ground.
+- Organize the cables and glue them to the base of the arm stand piece as shown in Figure X.
+- Upload or connect control code (such as Arduino servo control code) to test each servo individually.
+- Calibrate servo positions so that:
+  - One direction corresponds to “finger extended”
+  - The opposite direction corresponds to “finger curled”
 
 ## Software
 
