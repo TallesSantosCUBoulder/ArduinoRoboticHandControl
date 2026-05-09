@@ -1,13 +1,7 @@
-# Name: Joshua Thomas
-# Class: ECEN 4532
-# Project: Hand Gesture Volume Control
-
-# References: 
-#   https://github.com/pratham-bhatnagar/Gesture-Volume-Control
-#   https://mediapipe.readthedocs.io/en/latest/solutions/hands.html
-
-# Collaborators
-#   https://chatgpt.com/
+# This program uses a webcam and MediaPipe to detect a single hand in real time.
+# It processes video frames, identifies whether a right hand is shown,
+# draws hand landmarks if detected, and displays on-screen instructions
+# based on whether a right hand is visible or not.
 
 import cv2
 import mediapipe as mp

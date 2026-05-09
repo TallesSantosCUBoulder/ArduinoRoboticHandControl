@@ -1,3 +1,21 @@
+# This code detects whether fingers are up or down using MediaPipe hand landmarks.
+# MediaPipe provides 21 landmark points for each hand, including fingertips and joints.
+
+# For the index, middle, ring, and pinky fingers, the code compares the y-coordinate
+# of the fingertip with the y-coordinate of the joint below it. If the fingertip is
+# higher (smaller y value in image coordinates), the finger is considered "up";
+# otherwise it is "down".
+
+# The thumb is handled differently because it moves sideways instead of vertically.
+# So the code compares x-coordinates instead of y-coordinates, and adjusts the logic
+# depending on whether the detected hand is left or right.
+
+# Additionally, the code measures the distance between the thumb tip and index tip
+# to detect a pinch gesture (like an "OK" sign), normalized by hand size for stability.
+
+# Finally, these individual finger states (True/False values) are combined to recognize
+# specific hand gestures such as fist, peace sign, five fingers, or other custom gestures.
+
 import serial
 import time
 import cv2
