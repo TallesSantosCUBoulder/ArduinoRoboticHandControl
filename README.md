@@ -10,7 +10,7 @@ This project shows how digital signal processing can be used with a few servo mo
 
 ## Inspiration & Research
 
-First, I started with a simple Google search for inspiration. I was mainly looking for an existing project with available STL files to avoid redesigning the hand and fingers from scratch. I also wanted a design that used fishing line or cables as finger tendons and was based on Arduino, since this was discussed with Professor Santos when the project was first assigned.
+First, I started with a simple Google search for inspiration. I was mainly looking for an existing project with available STL files to avoid redesigning the hand and fingers from scratch. I also wanted a design that used fishing line or cables as finger tendons and was Arduino friendly, since this was discussed with Professor Santos when the project was first assigned.
 
 I found the inspiration for this project on Google Images and chose it because the design seemed simple, used an Arduino, and controlled each finger with SG90 servo motors. I also found additional images from the same project website that showed more detailed views of the assembly process, specifically how the fingers were held together using paracord and where the motors were mounted. The construction looked relatively straightforward, so I proceeded to download the STL files.
 
