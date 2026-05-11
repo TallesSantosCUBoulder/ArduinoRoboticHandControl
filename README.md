@@ -72,7 +72,7 @@ The robotic hand is made up of 3D printed parts, strings, rubber bands, and serv
 - Feed the untied end of the fishing line through the hole at the tip of each finger. The knot should prevent it from pulling through completely.
 - Then, route both the paracord and fishing lines through the corresponding holes in the hand piece.
 - Tie the paracord for each finger using an overhand knot, leaving about 1 cm of slack between finger segments so they can bend properly.
-- Feed the fishing lines from the hand piece into the corresponding holes in the arm piece, making sure the holes are aligned and the each line can move properly.
+- Feed the fishing lines from the hand piece into the corresponding holes in the arm piece.
 - Secure the bottom of the hand to the top of the arm piece using hot glue.
 - Mount five servo motors onto the arm piece using hot glue, positioning them as shown in Figure X.
 - Attach single-sided servo arms to each motor using screws.
