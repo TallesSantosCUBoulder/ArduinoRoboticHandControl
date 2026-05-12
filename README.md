@@ -8,7 +8,9 @@ Using OpenCV and MediaPipe, the Python program detects and classifies different 
 
 This project demonstrates how a few servo motors and simple 3D printed components can be used to create interactive robotic motion.
 
-_Figure 1: GIF of Open & Close Hand Movement_ 
+<img width="250" alt="IMG_3895" src="https://github.com/user-attachments/assets/9049a820-6bd2-47ed-9448-5bd38cc357b7" />
+
+_Figure 1: Image of fully assembled robotic hand_
 
 ## Inspiration & Research
 
