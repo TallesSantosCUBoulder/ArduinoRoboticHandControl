@@ -22,7 +22,7 @@ import cv2          # Imports OpenCV for capturing and displaying video frames
 import mediapipe as mp  # Imports MediaPipe for hand landmark detection
 import math         # Imports the math module for calculating distances
 
-arduino = serial.Serial(port='/dev/cu.usbmodem14101', baudrate=115200, timeout=.1)
+arduino = serial.Serial(port='/dev/cu.usbmodem14301', baudrate=115200, timeout=.1)
 # Opens a serial connection to the Arduino on the specified port at 115200 baud rate
 
 def write_read(x):
