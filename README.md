@@ -129,6 +129,52 @@ src="https://github.com/user-attachments/assets/1a9477ac-9001-4020-8743-262b881d
 
 _Figure 9: System Flowchart (2 of 2)_
 
+### Arduino Code Explanation
+
+#### Serial Communication & Command Handling
+
+The Arduino is configured to communicate at a baud rate of 115200, which must match the baud rate set in the Python script. In the main `loop()`, the Arduino checks whether data is available on the serial port. When a value arrives, it is read as a string and converted to an integer using `toInt()`. That integer is passed into a `switch` statement that maps each value from 1 to 9 to a specific gesture. Any value outside this range falls into the `default` case, which closes all fingers into a fist position. A 200-millisecond delay is added after each command is processed, and any remaining bytes in the serial buffer are flushed to prevent leftover input from triggering unintended gesture changes.
+
+#### Arduino Library Requirements
+
+The Arduino code uses the built-in `Servo.h` library, which comes pre-installed with the Arduino IDE and does not need to be downloaded separately. No additional libraries are required. It is included at the top of the sketch with:
+
+```cpp
+#include <Servo.h>
+```
+
+#### Servo Pin Assignments & Initialization
+
+The five servos are attached to PWM-capable digital pins during `setup()`. The pin assignments are as follows:
+
+| Finger | Pin |
+| ------ | --- |
+| Thumb  | 5   |
+| Index  | 6   |
+| Middle | 9   |
+| Ring   | 10  |
+| Pinky  | 11  |
+
+On startup, all servos are moved to the UP (180°) position so the hand begins in a fully open state. The `writeThumbAndMiddle()` function is used for the initial positioning of the thumb and middle finger to ensure the safety logic runs correctly from the start.
+
+#### Servo Position Mapping
+
+Each servo uses two defined positions: `UP` is set to 180 degrees and corresponds to a finger in the extended position, and `DOWN` is set to 0 degrees and corresponds to a finger that is fully curled. These values may need to be adjusted slightly depending on how the fishing line was tensioned and how the servo arms were attached during assembly. The index servo in Gesture 8 is set to 80 degrees rather than a full UP or DOWN position, which places it at a partially bent angle to form a convincing OK shape alongside the pinched thumb.
+
+#### Servo Arm Collision Safety Logic
+
+* The collision safety logic is implemented in two functions: writeThumbSafe() and writeThumbAndMiddle().
+
+  * In writeThumbSafe(), thumb movement is blocked whenever middleIsDown == true, preventing any independent thumb motion that could interfere with the middle finger's position.
+  * In writeThumbAndMiddle(), the system performs a similar check using middlePosCurrent == DOWN. If the middle finger is already down, any combined update that would also move the thumb is prevented to avoid unsafe transitions.
+* Both functions rely on stored state variables (middleIsDown, middlePosCurrent) to make sure that the thumb is only allowed to move when the middle finger is not in a potentially conflicting position.
+
+`writeThumbSafe()` checks the `middleIsDown` flag before allowing the thumb to move. If the middle finger is currently in the DOWN position, any command to move the thumb to a new position is blocked and a message is printed to the serial monitor. This prevents independent thumb movement while the middle finger is in a position that could cause a collision.
+
+`writeMiddleSafe()` moves the middle servo without restriction but updates the `middleIsDown` flag and the `middlePosCurrent` variable so that subsequent thumb commands can check the current state accurately.
+
+`writeThumbAndMiddle()` handles cases where both servos need to move at the same time. Before executing the move, it checks whether the middle finger is already in the DOWN position and whether the thumb position would actually change. If both conditions are true, the command is blocked. If the middle finger is not down, both servos are moved together and all state variables are updated in a single operation. Moving them together rather than sequentially reduces the window during which one servo could be in an unsafe intermediate position while the other has not yet moved.
+
 ### Python Code Explanation
 
 #### Libraries & Environment Setup
@@ -199,52 +245,6 @@ Once the finger states are evaluated, they are compared against the fixed patter
 | 9           | Middle Finger | Down  | Down  | Up     | Down | Down  |
 
 The `last_sent` variable is used to prevent the same gesture number from being transmitted repeatedly on consecutive frames. A new serial command is only sent when the recognized gesture differs from the previously sent value, which reduces unnecessary traffic over the serial connection and prevents the Arduino from processing redundant inputs.
-
-### Arduino Code Explanation
-
-#### Serial Communication & Command Handling
-
-The Arduino is configured to communicate at a baud rate of 115200, which must match the baud rate set in the Python script. In the main `loop()`, the Arduino checks whether data is available on the serial port. When a value arrives, it is read as a string and converted to an integer using `toInt()`. That integer is passed into a `switch` statement that maps each value from 1 to 9 to a specific gesture. Any value outside this range falls into the `default` case, which closes all fingers into a fist position. A 200-millisecond delay is added after each command is processed, and any remaining bytes in the serial buffer are flushed to prevent leftover input from triggering unintended gesture changes.
-
-#### Arduino Library Requirements
-
-The Arduino code uses the built-in `Servo.h` library, which comes pre-installed with the Arduino IDE and does not need to be downloaded separately. No additional libraries are required. It is included at the top of the sketch with:
-
-```cpp
-#include <Servo.h>
-```
-
-#### Servo Pin Assignments & Initialization
-
-The five servos are attached to PWM-capable digital pins during `setup()`. The pin assignments are as follows:
-
-| Finger | Pin |
-| ------ | --- |
-| Thumb  | 5   |
-| Index  | 6   |
-| Middle | 9   |
-| Ring   | 10  |
-| Pinky  | 11  |
-
-On startup, all servos are moved to the UP (180°) position so the hand begins in a fully open state. The `writeThumbAndMiddle()` function is used for the initial positioning of the thumb and middle finger to ensure the safety logic runs correctly from the start.
-
-#### Servo Position Mapping
-
-Each servo uses two defined positions: `UP` is set to 180 degrees and corresponds to a finger in the extended position, and `DOWN` is set to 0 degrees and corresponds to a finger that is fully curled. These values may need to be adjusted slightly depending on how the fishing line was tensioned and how the servo arms were attached during assembly. The index servo in Gesture 8 is set to 80 degrees rather than a full UP or DOWN position, which places it at a partially bent angle to form a convincing OK shape alongside the pinched thumb.
-
-#### Servo Arm Collision Safety Logic
-
-* The collision safety logic is implemented in two functions: writeThumbSafe() and writeThumbAndMiddle().
-
-  * In writeThumbSafe(), thumb movement is blocked whenever middleIsDown == true, preventing any independent thumb motion that could interfere with the middle finger's position.
-  * In writeThumbAndMiddle(), the system performs a similar check using middlePosCurrent == DOWN. If the middle finger is already down, any combined update that would also move the thumb is prevented to avoid unsafe transitions.
-* Both functions rely on stored state variables (middleIsDown, middlePosCurrent) to make sure that the thumb is only allowed to move when the middle finger is not in a potentially conflicting position.
-
-`writeThumbSafe()` checks the `middleIsDown` flag before allowing the thumb to move. If the middle finger is currently in the DOWN position, any command to move the thumb to a new position is blocked and a message is printed to the serial monitor. This prevents independent thumb movement while the middle finger is in a position that could cause a collision.
-
-`writeMiddleSafe()` moves the middle servo without restriction but updates the `middleIsDown` flag and the `middlePosCurrent` variable so that subsequent thumb commands can check the current state accurately.
-
-`writeThumbAndMiddle()` handles cases where both servos need to move at the same time. Before executing the move, it checks whether the middle finger is already in the DOWN position and whether the thumb position would actually change. If both conditions are true, the command is blocked. If the middle finger is not down, both servos are moved together and all state variables are updated in a single operation. Moving them together rather than sequentially reduces the window during which one servo could be in an unsafe intermediate position while the other has not yet moved.
 
 ## Results
 
