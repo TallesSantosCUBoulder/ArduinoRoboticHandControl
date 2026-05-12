@@ -104,7 +104,7 @@ _Figure 4: Image of knots on the fingertips_
 
 _Figure 5: Image of wiring coming out of arm_ 
 
-#### Directions: Electrical Component Assembly
+#### Electrical Component Assembly Instructions
 
 - Identify all five servo motors and label them (e.g., Thumb, Index, Middle, Ring, Pinky) to avoid wiring confusion.
 - Connect each servo motor to the Arduino:
@@ -119,6 +119,8 @@ _Figure 5: Image of wiring coming out of arm_
   - One direction corresponds to "finger extended"
   - The opposite direction corresponds to "finger curled"
 
+
+<img width="500" alt="IMG_1864" src="https://github.com/user-attachments/assets/96988389-e0ef-44b0-a01a-6a41c1f30a1e" />
 
 _Figure 6: Circuit Schematic_
 
