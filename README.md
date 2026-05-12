@@ -259,8 +259,7 @@ Once the finger states are evaluated, they are compared against the fixed patter
 | 5           | Open Hand     | Up    | Up    | Up     | Up   | Up    |
 | 6           | Hang Loose    | Up    | Down  | Down   | Down | Up    |
 | 7           | I Love You    | Up    | Up    | Down   | Down | Up    |
-| 8           | OK            | Pinch | —     | Up     | Up   | Up    |
-| 9           | Middle Finger | Down  | Down  | Up     | Down | Down  |
+| 8           | OK            | Down  | Down  | Up     | Up   | Up    |
 
 The `last_sent` variable is used to prevent the same gesture number from being transmitted repeatedly on consecutive frames. A new serial command is only sent when the recognized gesture differs from the previously sent value, which reduces unnecessary traffic over the serial connection and prevents the Arduino from processing redundant inputs.
 
@@ -268,7 +267,21 @@ IMPORTANT: When running the two scripts, the Arduino script must be uploaded and
 
 ## Results
 
-_Figure 12: GIF of all 9 gestures_
+<img width="250" alt="IMG_3889" src="https://github.com/user-attachments/assets/6e07db47-24c6-4537-9e00-c65e387e40a8" />
+
+_Figure 12: GIF of mimicked counting gestures being performed_
+
+<img width="250" alt="IMG_3889 2" src="https://github.com/user-attachments/assets/a550cff4-1a1b-4c3d-88a8-e076c803f4f2" />
+
+_Figure 13: GIF of mimicked "hang loose" gesture being performed_
+
+<img width="250" alt="IMG_3889 3" src="https://github.com/user-attachments/assets/4de6bbe9-b8d7-4556-a771-3da994c73751" />
+
+_Figure 14: GIF of mimicked "OK" gesture being performed_
+
+<img width="250" alt="IMG_3889 4" src="https://github.com/user-attachments/assets/e56cede2-60bb-4441-91a0-cecfa9f67e45" />
+
+_Figure 15: GIF of mimicked "love you" gesture being performed_
 
 ## Conclusion
 
