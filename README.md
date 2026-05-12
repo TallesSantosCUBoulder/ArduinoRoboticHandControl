@@ -246,6 +246,8 @@ Once the finger states are evaluated, they are compared against the fixed patter
 
 The `last_sent` variable is used to prevent the same gesture number from being transmitted repeatedly on consecutive frames. A new serial command is only sent when the recognized gesture differs from the previously sent value, which reduces unnecessary traffic over the serial connection and prevents the Arduino from processing redundant inputs.
 
+Warning: When running the two scripts, the Arduino script must be uploaded and running first. Once uploaded, close the Serial Monitor in the Arduino IDE to release the serial port. If the Serial Monitor is left open, the Python script will be unable to connect and will throw a connection error. After closing it, run the Python script to begin gesture detection.
+
 ## Results
 
 _Figure 13: GIF of all 9 gestures_
