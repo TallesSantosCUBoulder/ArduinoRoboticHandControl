@@ -8,7 +8,7 @@ Using OpenCV and MediaPipe, the Python program detects and classifies different 
 
 This project demonstrates how a few servo motors and simple 3D printed components can be used to create interactive robotic motion.
 
-_Figure: GIF of Open & Close Hand Movement_ 
+_Figure 1: GIF of Open & Close Hand Movement_ 
 
 ## Inspiration & Research
 
@@ -76,15 +76,19 @@ The robotic hand is made up of 3D printed parts, fishing line, rubber bands, and
 - Tie the paracord for each finger using an overhand knot, leaving about 1 cm of slack between finger segments so they can bend properly.
 - Feed the fishing lines from the hand piece into the corresponding holes in the arm piece.
 - Secure the bottom of the hand to the top of the arm piece using hot glue.
-- Mount five servo motors onto the arm piece using hot glue, positioning them as shown in Figure X.
+- Mount five servo motors onto the arm piece using hot glue, positioning them as shown in Figure 2.
 - Attach single-sided servo arms to each motor using screws.
-- Tie each fishing line to its corresponding servo arm using a double fisherman's knot (see Figure X).
+- Tie each fishing line to its corresponding servo arm using a double fisherman's knot (see Figure 2).
 - Align all servo arms so that when they point toward the top of the hand, the fingers are extended, and when they rotate away from the fingers, the fingers curl into a fist.
 - Finally, attach a rubber band to the tip of each finger using a girth hitch. Tie an overhand knot at the base of each finger, leaving a loop large enough to wrap around the paracord knot at the knuckle.
 
-_Figure: Image of knots on the back of the hand_
-_Figure: Image of knots on the fingertips_
-_Figure: Image of wiring coming out of arm_ 
+_Figure 2: Image of servo motor configuration & knots - fully opened & closed (side by side)_
+
+_Figure 3: Image of knots on the back of the hand_
+
+_Figure 4: Image of knots on the fingertips_
+
+_Figure 5: Image of wiring coming out of arm_ 
 
 #### Directions: Electrical Component Assembly
 
@@ -95,13 +99,15 @@ _Figure: Image of wiring coming out of arm_
   - Connect all ground (GND) wires together and ensure a common ground between the external power supply and the microcontroller.
   - Place a 1000 µF electrolytic capacitor across the 5V and GND rails near the servos to help smooth current spikes.
 - Ensure the ground of the external power supply is connected to the Arduino's ground.
-- Organize the cables and glue them to the base of the arm stand piece as shown in Figure X.
+- Organize the cables and glue them to the base of the arm stand piece as shown in Figure 5.
 - Upload or connect control code (such as Arduino servo control code) to test each servo individually.
 - Calibrate servo positions so that:
   - One direction corresponds to "finger extended"
   - The opposite direction corresponds to "finger curled"
-_Figure : Circuit Schematic_
-_Figure : Image of breadboard_
+
+_Figure 6: Circuit Schematic_
+
+_Figure 7: Image of breadboard_
 
 ## Software
 
@@ -111,15 +117,17 @@ The software system consists of two programs that work together to detect hand g
 
 Before running the Python script, the Arduino code must be uploaded and the Arduino IDE serial monitor must be closed. If the serial monitor remains open, the Python script cannot access the COM port and will throw a connection error. After uploading, the Python script is launched from within the Conda virtual environment. The only value that may need to be changed between machines is the serial port name at the top of the Python file. On macOS it appears as `/dev/cu.usbmodemXXXX`, and on Windows it appears as `COMX`, where X is the port number assigned by the operating system. This value can be found in the Arduino IDE under Tools → Port.
 
+The overall software and hardware communication process is shown in Figures 8 and 9.
+
 <img width="500" alt="System Flowchart 1"
 src="https://github.com/user-attachments/assets/f12f0fca-d8da-4688-acba-a19808f56032" />
 
-_Figure: System Flowchart (1 of 2)_
+_Figure 8: System Flowchart (1 of 2)_
 
 <img width="500" alt="System Flowchart 2"
 src="https://github.com/user-attachments/assets/1a9477ac-9001-4020-8743-262b881d3931" />
 
-_Figure: System Flowchart (2 of 2)_
+_Figure 9: System Flowchart (2 of 2)_
 
 ### Python Code Explanation
 
@@ -140,7 +148,7 @@ A dedicated Conda virtual environment was created for this project to isolate it
 ```bash
 conda create -n robothand python=3.9
 conda activate robothand
-```
+````
 
 All required libraries were then installed into the active environment using `pip`. The environment must be activated each time before running the Python script.
 
@@ -148,14 +156,15 @@ All required libraries were then installed into the active environment using `pi
 
 OpenCV handles camera input, image processing, and display, while MediaPipe strictly handles hand tracking and landmark detection.
 
-MediaPipe Hands is a high-fidelity hand and finger tracking solution that employs machine learning to infer 21 three-dimensional landmarks of a hand from a single frame [1]. The system relies on these landmarks, shown in Figure 1, to determine finger positions and compute distances for gesture-based control. The names of these landmarks are shown in Figure 2. The MediaPipe library manages several parameters, including static image mode, maximum number of hands, model complexity, minimum detection confidence, minimum tracking confidence, multi-handedness, and multi-hand landmarks.
+MediaPipe Hands is a high-fidelity hand and finger tracking solution that employs machine learning to infer 21 three-dimensional landmarks of a hand from a single frame [1]. The system relies on these landmarks, shown in Figure 10, to determine finger positions and compute distances for gesture-based control. The names of these landmarks are shown in Figure 11. The MediaPipe library manages several parameters, including static image mode, maximum number of hands, model complexity, minimum detection confidence, minimum tracking confidence, multi-handedness, and multi-hand landmarks.
 
-_Figure : Hand landmark model showing 21 key-points corresponding to 21 hand-knuckle coordinates [1]._
-_Figure : Hand landmark names indexed from 0 to 20 [1]._
+_Figure 10: Hand landmark model showing 21 key-points corresponding to 21 hand-knuckle coordinates [1]._
 
-For example, as shown in Figure x, the thumb and index finger positions are obtained as pixel coordinates. The distance between the two fingers is then calculated using the Euclidean distance formula shown in Equation 1. In the code, this is implemented using a function that computes the straight-line distance in pixels between the thumb and index finger, as shown in Figure x.
+_Figure 11: Hand landmark names indexed from 0 to 20 [1]._
 
-_Figure : Image of thumb and index finger coordinates._
+For example, as shown in Figure 12, the thumb and index finger positions are obtained as pixel coordinates. The distance between the two fingers is then calculated using the Euclidean distance formula shown in Equation 1. In the code, this is implemented using a function that computes the straight-line distance in pixels between the thumb and index finger, as shown in Figure 12.
+
+_Figure 12: Image of thumb and index finger coordinates._
 
 ```math
 d = \sqrt{(x_2 - x_1)^2 + (y_2 - y_1)^2}
@@ -173,21 +182,21 @@ The thumb is handled differently because it moves laterally rather than vertical
 
 A pinch detection check is also included to handle the OK gesture. The Euclidean distance between the thumb tip and index tip is computed using the `distance()` helper function, then divided by the distance between the wrist and the base of the middle finger to produce a normalized pinch ratio. This normalization corrects for the hand moving closer to or farther from the camera. If the ratio falls below 0.35, a pinch is registered. The order of the gesture checks in the function matters: the pinch check runs first so that the OK gesture is not misclassified as a different finger combination.
 
-A message also needed to be displayed to instruct the user to keep the palm of the hand normal to the camera, since the distance between the fingers is calculated using two-dimensional coordinates. Rotating the fingers so that they overlap can cause the distance to shrink to zero from the camera's perspective. After making these changes, I moved on to the next iteration, which focuses on mapping the distance to the system volume control.
+A message is also displayed to instruct the user to keep the palm of the hand normal to the camera, since the distance between the fingers is calculated using two-dimensional coordinates. Rotating the fingers so that they overlap can cause the distance to shrink to zero from the camera's perspective.
 
 Once the finger states are evaluated, they are compared against the fixed patterns below to determine which gesture number to send to the Arduino:
 
-| Number Sent | Gesture | Thumb | Index | Middle | Ring | Pinky |
-|---|---|---|---|---|---|---|
-| 1 | One | Down | Up | Down | Down | Down |
-| 2 | Peace | Down | Up | Up | Down | Down |
-| 3 | Three | Down | Up | Up | Up | Down |
-| 4 | Four | Down | Up | Up | Up | Up |
-| 5 | Open Hand | Up | Up | Up | Up | Up |
-| 6 | Hang Loose | Up | Down | Down | Down | Up |
-| 7 | I Love You | Up | Up | Down | Down | Up |
-| 8 | OK | Pinch | — | Up | Up | Up |
-| 9 | Middle Finger | Down | Down | Up | Down | Down |
+| Number Sent | Gesture       | Thumb | Index | Middle | Ring | Pinky |
+| ----------- | ------------- | ----- | ----- | ------ | ---- | ----- |
+| 1           | One           | Down  | Up    | Down   | Down | Down  |
+| 2           | Peace         | Down  | Up    | Up     | Down | Down  |
+| 3           | Three         | Down  | Up    | Up     | Up   | Down  |
+| 4           | Four          | Down  | Up    | Up     | Up   | Up    |
+| 5           | Open Hand     | Up    | Up    | Up     | Up   | Up    |
+| 6           | Hang Loose    | Up    | Down  | Down   | Down | Up    |
+| 7           | I Love You    | Up    | Up    | Down   | Down | Up    |
+| 8           | OK            | Pinch | —     | Up     | Up   | Up    |
+| 9           | Middle Finger | Down  | Down  | Up     | Down | Down  |
 
 The `last_sent` variable is used to prevent the same gesture number from being transmitted repeatedly on consecutive frames. A new serial command is only sent when the recognized gesture differs from the previously sent value, which reduces unnecessary traffic over the serial connection and prevents the Arduino from processing redundant inputs.
 
@@ -210,12 +219,12 @@ The Arduino code uses the built-in `Servo.h` library, which comes pre-installed 
 The five servos are attached to PWM-capable digital pins during `setup()`. The pin assignments are as follows:
 
 | Finger | Pin |
-|---|---|
-| Thumb | 5 |
-| Index | 6 |
-| Middle | 9 |
-| Ring | 10 |
-| Pinky | 11 |
+| ------ | --- |
+| Thumb  | 5   |
+| Index  | 6   |
+| Middle | 9   |
+| Ring   | 10  |
+| Pinky  | 11  |
 
 On startup, all servos are moved to the UP (180°) position so the hand begins in a fully open state. The `writeThumbAndMiddle()` function is used for the initial positioning of the thumb and middle finger to ensure the safety logic runs correctly from the start.
 
@@ -223,13 +232,13 @@ On startup, all servos are moved to the UP (180°) position so the hand begins i
 
 Each servo uses two defined positions: `UP` is set to 180 degrees and corresponds to a finger in the extended position, and `DOWN` is set to 0 degrees and corresponds to a finger that is fully curled. These values may need to be adjusted slightly depending on how the fishing line was tensioned and how the servo arms were attached during assembly. The index servo in Gesture 8 is set to 80 degrees rather than a full UP or DOWN position, which places it at a partially bent angle to form a convincing OK shape alongside the pinched thumb.
 
-_Figure: Image of servo motor configuration & knots - fully opened & closed (side by side)_
-
 #### Servo Arm Collision Safety Logic
-- The collision safety logic is implemented in two functions: writeThumbSafe() and writeThumbAndMiddle().
-  - In writeThumbSafe(), thumb movement is blocked whenever middleIsDown == true, preventing any independent thumb motion that could interfere with the middle finger's position.
-  - In writeThumbAndMiddle(), the system performs a similar check using middlePosCurrent == DOWN. If the middle finger is already down, any combined update that would also move the thumb is prevented to avoid unsafe transitions.
-- Both functions rely on stored state variables (middleIsDown, middlePosCurrent) to make sure that the thumb is only allowed to move when the middle finger is not in a potentially conflicting position.
+
+* The collision safety logic is implemented in two functions: writeThumbSafe() and writeThumbAndMiddle().
+
+  * In writeThumbSafe(), thumb movement is blocked whenever middleIsDown == true, preventing any independent thumb motion that could interfere with the middle finger's position.
+  * In writeThumbAndMiddle(), the system performs a similar check using middlePosCurrent == DOWN. If the middle finger is already down, any combined update that would also move the thumb is prevented to avoid unsafe transitions.
+* Both functions rely on stored state variables (middleIsDown, middlePosCurrent) to make sure that the thumb is only allowed to move when the middle finger is not in a potentially conflicting position.
 
 `writeThumbSafe()` checks the `middleIsDown` flag before allowing the thumb to move. If the middle finger is currently in the DOWN position, any command to move the thumb to a new position is blocked and a message is printed to the serial monitor. This prevents independent thumb movement while the middle finger is in a position that could cause a collision.
 
@@ -238,13 +247,15 @@ _Figure: Image of servo motor configuration & knots - fully opened & closed (sid
 `writeThumbAndMiddle()` handles cases where both servos need to move at the same time. Before executing the move, it checks whether the middle finger is already in the DOWN position and whether the thumb position would actually change. If both conditions are true, the command is blocked. If the middle finger is not down, both servos are moved together and all state variables are updated in a single operation. Moving them together rather than sequentially reduces the window during which one servo could be in an unsafe intermediate position while the other has not yet moved.
 
 ## Results
-_Figure: GIF of all 9 gestures_
+
+_Figure 13: GIF of all 9 gestures_
 
 ## Conclusion
 
 This project successfully demonstrated that a 3D printed robotic hand can replicate common human hand gestures in real time using a small number of affordable components. By combining MediaPipe's hand landmark detection with Arduino-controlled servo motors and serial communication, the system was able to recognize nine distinct gestures and translate them into physical finger movements with reasonable accuracy and low latency. The mechanical assembly, while straightforward in concept, required careful calibration of servo arm positions and fishing line tension to achieve clean and consistent finger motion. Overall, the project met its core objective of building an interactive robotic hand and served as a practical introduction to the integration of computer vision, embedded systems, and mechanical design.
 
 ## References
+
 <table>
 <tr>
 <td valign="top">[1]</td>
