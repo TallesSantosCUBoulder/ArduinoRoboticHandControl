@@ -22,7 +22,7 @@ import cv2
 import mediapipe as mp
 import math
 
-arduino = serial.Serial(port='/dev/cu.usbmodem14301', baudrate=115200, timeout=.1)
+arduino = serial.Serial(port='/dev/cu.usbmodem14101', baudrate=115200, timeout=.1)
 
 def write_read(x):
     arduino.write(bytes(str(x), 'utf-8'))
