@@ -82,11 +82,23 @@ The robotic hand is made up of 3D printed parts, fishing line, rubber bands, and
 - Align all servo arms so that when they point toward the top of the hand, the fingers are extended, and when they rotate away from the fingers, the fingers curl into a fist.
 - Finally, attach a rubber band to the tip of each finger using a girth hitch. Tie an overhand knot at the base of each finger, leaving a loop large enough to wrap around the paracord knot at the knuckle.
 
+<img width="250" alt="IMG_3902" src="https://github.com/user-attachments/assets/3cb37288-a545-41b2-9486-286eec0ec375" />
+<img width="250" alt="IMG_3900" src="https://github.com/user-attachments/assets/b49bc9d4-9808-4166-9ee3-961629dc6388" />
+
 _Figure 2: Image of servo motor configuration & knots - fully opened & closed (side by side)_
+
+<img width="250" alt="IMG_3894" src="https://github.com/user-attachments/assets/fa517318-2088-41aa-95ed-95558e0e5b6f" />
+
 
 _Figure 3: Image of knots on the back of the hand_
 
+<img width="250" alt="IMG_3899" src="https://github.com/user-attachments/assets/9f1e853a-9d7b-41da-a64d-82134b9dc029" />
+
+
 _Figure 4: Image of knots on the fingertips_
+
+<img width="250" alt="IMG_3893" src="https://github.com/user-attachments/assets/93bf7b98-4e54-4a17-9c32-f8f83516048b" />
+
 
 _Figure 5: Image of wiring coming out of arm_ 
 
@@ -105,7 +117,10 @@ _Figure 5: Image of wiring coming out of arm_
   - One direction corresponds to "finger extended"
   - The opposite direction corresponds to "finger curled"
 
+
 _Figure 6: Circuit Schematic_
+
+<img width="250" alt="IMG_3890" src="https://github.com/user-attachments/assets/8b8437e4-723b-4022-b3e1-fe6f0b0a5b94" />
 
 _Figure 7: Image of breadboard_
 
@@ -204,19 +219,14 @@ OpenCV handles camera input, image processing, and display, while MediaPipe stri
 
 MediaPipe Hands is a high-fidelity hand and finger tracking solution that employs machine learning to infer 21 three-dimensional landmarks of a hand from a single frame [1]. The system relies on these landmarks, shown in Figure 10, to determine finger positions and compute distances for gesture-based control. The names of these landmarks are shown in Figure 11. The MediaPipe library manages several parameters, including static image mode, maximum number of hands, model complexity, minimum detection confidence, minimum tracking confidence, multi-handedness, and multi-hand landmarks.
 
+
+<img width="250" alt="Screenshot 2026-05-12 at 9 53 43 AM" src="https://github.com/user-attachments/assets/6a9adabc-71c0-46b8-968f-db7a236acda1" />
+
 _Figure 10: Hand landmark model showing 21 key-points corresponding to 21 hand-knuckle coordinates [1]._
 
+<img width="500" alt="Screenshot 2026-05-12 at 9 53 53 AM" src="https://github.com/user-attachments/assets/c06c04db-7ff8-431e-a2a2-44378255a5f6" />
+
 _Figure 11: Hand landmark names indexed from 0 to 20 [1]._
-
-For example, as shown in Figure 12, the thumb and index finger positions are obtained as pixel coordinates. The distance between the two fingers is then calculated using the Euclidean distance formula shown in Equation 1. In the code, this is implemented using a function that computes the straight-line distance in pixels between the thumb and index finger, as shown in Figure 12.
-
-_Figure 12: Image of thumb and index finger coordinates._
-
-```math
-d = \sqrt{(x_2 - x_1)^2 + (y_2 - y_1)^2}
-```
-
-<p align="right"><em>Equation 1: Distance Equation</em></p>
 
 #### Gesture Recognition Logic
 
@@ -226,7 +236,13 @@ For the index, middle, ring, and pinky fingers, the function compares the y-coor
 
 The thumb is handled differently because it moves laterally rather than vertically. Its state is determined by comparing the x-coordinate of the thumb tip against the x-coordinate of the joint below it. The comparison is also flipped depending on whether the hand is labeled Left or Right, since the thumb points in opposite horizontal directions for each hand.
 
-A pinch detection check is also included to handle the OK gesture. The Euclidean distance between the thumb tip and index tip is computed using the `distance()` helper function, then divided by the distance between the wrist and the base of the middle finger to produce a normalized pinch ratio. This normalization corrects for the hand moving closer to or farther from the camera. If the ratio falls below 0.35, a pinch is registered. The order of the gesture checks in the function matters: the pinch check runs first so that the OK gesture is not misclassified as a different finger combination.
+A pinch detection check is also included to handle the OK gesture. The Euclidean distance between the thumb tip and index tip is computed using the `distance()` function shown in Equation 1, and then divided by the distance between the wrist and the base of the middle finger to produce a normalized pinch ratio. This normalization corrects for the hand moving closer to or farther from the camera. If the ratio falls below 0.35, a pinch is registered. The order of the gesture checks in the function matters: the pinch check runs first so that the OK gesture is not misclassified as a different finger combination.
+
+```math
+d = \sqrt{(x_2 - x_1)^2 + (y_2 - y_1)^2}
+```
+
+<p align="right"><em>Equation 1: Distance Equation</em></p>
 
 A message is also displayed to instruct the user to keep the palm of the hand normal to the camera, since the distance between the fingers is calculated using two-dimensional coordinates. Rotating the fingers so that they overlap can cause the distance to shrink to zero from the camera's perspective.
 
@@ -250,7 +266,7 @@ IMPORTANT: When running the two scripts, the Arduino script must be uploaded and
 
 ## Results
 
-_Figure 13: GIF of all 9 gestures_
+_Figure 12: GIF of all 9 gestures_
 
 ## Conclusion
 
